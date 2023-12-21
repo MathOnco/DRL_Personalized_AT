@@ -1,0 +1,19 @@
+architecture:[128, 64, 32, 16, 10]
+base:0.1
+gamma:0.9999
+K:1.0
+dS:0.0078682167556054
+hol:0.05
+n_values_size:1
+punish:-0.1
+dD:1.5
+n_values_delta:0
+n_doseOptions:2
+R0:4.256746072629835e-06
+S0:0.4256703505169107
+drug_use:0
+DMax:1.0
+dR:0.0078682167556054
+rS:0.027000000000000003
+n_inputs:1
+rR:0.0207927990105891

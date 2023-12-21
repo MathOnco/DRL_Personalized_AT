@@ -1,0 +1,14 @@
+font.size: 14
+mathtext.fontset : custom
+mathtext.rm : Arial
+
+
+text.color : 2e2e2e  # Dark grey
+axes.labelcolor : 2e2e2e 
+xtick.color : 2e2e2e 
+ytick.color : 2e2e2e 
+
+
+figure.facecolor : dbdbdb  # So border is visible inline (but not in saved figures)
+axes.facecolor : white
+savefig.facecolor : white

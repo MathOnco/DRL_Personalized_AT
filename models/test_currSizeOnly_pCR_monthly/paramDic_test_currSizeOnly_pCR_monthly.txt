@@ -1,0 +1,19 @@
+DMax:1.0
+architecture:[128, 64, 32, 16, 10]
+dR:0.0
+R0:0.00075
+base:0.1
+n_values_size:1
+S0:0.74925
+dS:0.0
+rR:0.027
+gamma:0.9999
+punish:0
+n_doseOptions:2
+drug_use:0
+n_inputs:1
+rS:0.027
+n_values_delta:0
+K:1.0
+hol:0.05
+dD:1.5

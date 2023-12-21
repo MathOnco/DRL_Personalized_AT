@@ -1,0 +1,24 @@
+# Ignore system files
+.DS_Store
+*pycache*
+**/scratch
+**/tmp
+.idea
+*.key
+*.code-workspace
+*.vscode
+
+# Ignore large output files
+paper_figures/data/*
+treatment_history*.csv
+
+# Ignore tensorflow events files
+events.out.tfevents*
+
+# Ignore confidential patient data
+demo/patients/eLife_Trial/*/
+demo/patients/Bruchovsky_et_al/*/
+paper_figures/data/Fig0a/
+
+# Miscellaneous
+**/.ipynb_checkpoints

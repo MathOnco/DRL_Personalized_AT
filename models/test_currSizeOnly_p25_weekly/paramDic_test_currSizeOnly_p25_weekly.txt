@@ -1,0 +1,19 @@
+drug_use:0
+rS:0.027000000000000003
+R0:4.256746072629835e-06
+dD:1.5
+punish:-0.1
+S0:0.4256703505169107
+n_values_delta:0
+DMax:1.0
+n_doseOptions:2
+hol:0.05
+K:1.0
+dS:0.0078682167556054
+architecture:[128, 64, 32, 16, 10]
+n_values_size:1
+n_inputs:1
+rR:0.0207927990105891
+gamma:0.9999
+base:0.1
+dR:0.0078682167556054
