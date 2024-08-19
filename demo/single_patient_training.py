@@ -1,13 +1,13 @@
 '''
 Script to train model with only the current tumor size as input.
-Run from the demo/ directory from virtual environment with drl_env.yml installed. (see [SetUp](../README.md#setup))
+Run from the top level directory from virtual environment with drl_env.yml installed. (see [SetUp](../README.md#setup))
 '''
 import os
 import sys
 from time import sleep, asctime
 import pandas as pd
 
-sys.path.append("../utils")
+sys.path.append("utils")
 from myUtils import convert_ode_parameters
 from drlUtils import run_training
 
@@ -23,7 +23,7 @@ if __name__ == '__main__':
     learning_rate = 1e-4  # Learning rate
     num_workers = 8  #multiprocessing.cpu_count() # Set workers to number of available CPU threads
     max_epochs = 100000
-    model_path = "../models"  # Path to save model
+    model_path = "models"  # Path to save model
     model_name = "test_currSizeOnly_p25_monthly"
     load_model = False
     logging_interval = 20000  # Will save the state of the network every logging_interval patients
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     verbose = 2
     
     # Tumour model parameters
-    trainingDataDf = pd.read_csv("../models/trainingPatientsDf_bruchovsky.csv", index_col=0)
+    trainingDataDf = pd.read_csv("models/trainingPatientsDf_bruchovsky.csv", index_col=0)
     trainingDataDf = trainingDataDf[trainingDataDf.PatientId==25]
 
     # Run training
