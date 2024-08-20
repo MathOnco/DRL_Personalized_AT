@@ -1,6 +1,6 @@
 # ML Driven Treatment Scheduling
 
-Code repository for [Learning to Adapt - Deep Reinforcement Learning in Treatment-Resistant Prostate Cancer](https://doi.org/10.1101/2023.04.28.538766).
+Code repository for [Mathematical Model-Driven Deep Learning Enables Personalized Adaptive Therapy](https://doi.org/10.1158/0008-5472.CAN-23-2040).
 Trains an [A3C](https://arxiv.org/abs/1602.01783) Deep Reinforcement Learning (DRL) model to treat a virtual cancer patient, modelled by a simple Lotka-Volterra ODE model.
 
 ## Repository Index
@@ -8,7 +8,7 @@ Trains an [A3C](https://arxiv.org/abs/1602.01783) Deep Reinforcement Learning (D
 * [`demo`](demo) Documented example scripts for single and multi-patient training
 * [`images`](images) Image outputs files to document research. Does not contain final paper images.
 * [`models`](models) Pre-trained models, for use in evaluation and figure scripts
-* [`paper_figures`](paper_figures) All code used to generate figures for the [paper](https://doi.org/10.1101/2023.04.28.538766)
+* [`paper_figures`](paper_figures) All code used to generate figures for the [paper](https://doi.org/10.1158/0008-5472.CAN-23-2040)
 * [`utils`](utils) Utility functions used in training and figure generation, including [virtual patient model](utils/LotkaVolterraModel.py)
 
 ## Setup Instructions <a name="SetUp"></a>
@@ -22,15 +22,13 @@ pip install tensorflow==1.5
 conda install ipykernel
 ```
 
-The main script `evaluate.py` can be ran from the `demo/` directory, and evaluated the performance of a pre-trained model (generated using the `train.py` script).
-
 ## Model Evaluation
 
 ### Workflow Summary
 
-The section describes the workflow implemented in `evaluate.py` - it does not need to be implemented manually by a user but provides a step-by-step guide to the functionality of this script.
+The section describes the workflow implemented in `drlUtils/run_evaluation` - it does not need to be implemented manually by a user but provides a step-by-step guide to the functionality of this script.
 
-It uses a pre-trained model, as implemented in `train.py` with classes from `drlModel.py`. This created a Worker class which copies the network - multiple workers can be ran asynchronously to generate the A3C network.
+It uses a pre-trained model, as implemented in `drlUtils/run_training` with classes from `drlModel.py`. This created a Worker class which copies the network - multiple workers can be ran asynchronously to generate the A3C network.
 
 1. Define parameters for model. This includes parameters for both the DRL model, such as reward metric and allowed treatments, and for the tumour model. It is also possible to define the model and results filepaths at this point. Further details of this are available in a separate file `parameters.md`.
 
@@ -44,7 +42,7 @@ It uses a pre-trained model, as implemented in `train.py` with classes from `drl
     4. Calculate the reward from that action.
     5. Record this timestep - see detail [below](#reading-output-files).
 
-Various model performance metrics are then calculated from this output file in `demo/jnb_analysis.ipynb`.
+This is all packaged in the single and multiple patient examples in the `demo/` directory. Various model performance metrics are then calculated in the jupyter notebooks within the same directory.
 
 ### Reading Output Files
 
@@ -121,9 +119,9 @@ As well as ensuring all reward sums therefore converge, this factor is used to p
 
 ### Training Output
 
-The `training.py` script will generate a number of files in the `models/` directory, including checkpoints of the trained model, and log files of the training.
+The training scripts will generate a number of files in the `models/` directory, including checkpoints of the trained model, and log files of the training.
 
-The model checkpoints are saved regularly, and stored in directories such as `demo/models/ThuMar311244502022/100_patients_ThuMar311244502022`. These can be read back into tensorflow for further training or evaluation using the `tf.train.get_checkpoint_state()` function.
+The model checkpoints are saved regularly, and stored in directories such as `models\test_currSizeOnly_p25_monthly`. These can be read back into tensorflow for further training or evaluation using the `tf.train.get_checkpoint_state()` function.
 
 The log files for training are not essential for evaluation, but may be useful to determine the state of training - they are updated iteratively and so can be viewed while training is still running. They may be viewed with [tensorboard](https://www.tensorflow.org/tensorboard/get_started), which can be run using `tensorboard --logdir path/to/logs` from the home directory, and accessed at `http://localhost:6006`. These are provided on a per-worker basis, and also to summarise the global network.
 

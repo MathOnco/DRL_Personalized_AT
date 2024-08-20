@@ -6,7 +6,7 @@ from time import sleep, asctime
 import pandas as pd
 import multiprocessing
 
-sys.path.append("../utils")
+sys.path.append("utils")
 from myUtils import convert_ode_parameters
 from drlUtils import run_training
 
@@ -21,8 +21,8 @@ if __name__ == '__main__':
     day_interval = 30  # Interval between decision points (time step)
     learning_rate = 1e-4  # Learning rate
     num_workers = 6  #multiprocessing.cpu_count() # Set workers to number of available CPU threads
-    curr_epochs = 100000  # 
-    model_path = "../models"
+    curr_epochs = 100000  
+    model_path = "models"
     model_name = "test_currSizeOnly_p25_step1"
     load_model = True
     logging_interval = 5000  # Will save the state of the network every logging_interval patients
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     verbose = 2
     
     max_epochs = curr_epochs + 50000
-    trainingDataDf = pd.read_csv("../models/truncPatientsDf_bruchovsky.csv", index_col=0)
+    trainingDataDf = pd.read_csv("models/truncPatientsDf_bruchovsky.csv", index_col=0)
 
     def train(id):
         patients_df = trainingDataDf[trainingDataDf.PatientId==id]
@@ -43,8 +43,13 @@ if __name__ == '__main__':
                     learning_rate=learning_rate, updating_interval=day_interval, num_workers=num_workers, max_epochs=max_epochs, model_name=model_name,
                     load_model=load_model, model_loaded_name=model_loaded_name, model_path=model_path, logging_interval=logging_interval, verbose=verbose)
 
+    # Parallel approach to training on multiple patients - OS dependent
     def main():
         pool = multiprocessing.Pool(processes=7)
         zip(*pool.map(train, trainingDataDf.PatientId.unique()))
 
     main()
+
+    # Back-up serial approach is the parallel approach fails
+    # for id in trainingDataDf.PatientId.unique():
+    #     train(id)
